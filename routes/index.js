@@ -8,6 +8,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/characters', main.getCharacterList);
+router.get('/characters/:apikey', main.getCharacterList);
 
 module.exports = router;

@@ -32,6 +32,17 @@
       local.setItem("gw2_API_Key", vm.apiKey);
     }
 
+    function getCharacterList() {
+      setAPIKey();
+
+      $http({
+        method: 'GET',
+        url: '/characters/' + vm.apiKey
+      })
+      .then(characters => {
+        vm.results = characters.data;
+      })
+    }
 
   }
 })();
