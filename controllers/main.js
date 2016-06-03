@@ -48,8 +48,7 @@ function searchItem(req, res, next) {
   var foundItemOnChars = [];
   request(gw2ShiniesApi)
     .then(items => {
-      console.log(items)
-      items = JSON.parse(items)
+      items = JSON.parse(items);
       itemId = items[0].item_id;
       return request(gw2GameApi)
     })
@@ -61,8 +60,6 @@ function searchItem(req, res, next) {
             return slot !== null;
           })
           bag.inventory.forEach(invItem => {
-            console.log(invItem)
-            console.log(invItem.id == itemId)
             if (invItem.id == itemId) {
               foundItemOnChars.push(character.name)
             }
