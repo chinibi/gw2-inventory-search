@@ -17,12 +17,12 @@
     <div class="jumbotron">
       <div class="container-fluid">
         <h1>Guild Wars 2 Inventory Search</h1>
-        <form >
+        <form>
           <div class="form-group">
             <label for="apikey">API Key with Characters and Inventories enabled</label>
             <input name="apikey" ng-model="vm.apiKey" type="text" class="input-lg form-control" id="apikey" />
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="query-option">Select query</label>
               <select class="form-control" id="query-option">
                 <option>Get characters</option>
@@ -30,15 +30,25 @@
               </select>
             </div>
 
-            <button class="btn btn-default" ng-click="vm.getCharacterList()">Submit</button>
+            <button class="btn btn-default" ng-click="vm.getCharacterList()">Submit</button> -->
+          </div>
+        </form>
+
+        <form>
+          <div class="form-group">
+            <label for="item-search">Item to search for</label>
+            <input ng-model="vm.itemToSearch" type="text" class="input-lg form-control" id="item-search" />
+
+            <button class="btn btn-default" ng-click="vm.searchInventory()">Submit</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div>
+    <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive"  src="images/gears.svg" /></div>
+    <div class="container-fluid">
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="char in vm.results">
+        <li class="list-group-item" ng-repeat="char in vm.results track by $index">
           {{char}}
         </li>
       </ul>
