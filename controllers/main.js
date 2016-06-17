@@ -44,29 +44,35 @@ function searchItem(req, res, next) {
   };
 
   // now we make the calls
-  var itemId;
-  var foundItemOnChars = [];
+  var matchResponse = [];
+  var itemsFound = [];
   request(gw2ShiniesApi)
     .then(items => {
-      items = JSON.parse(items);
-      itemId = items[0].item_id;
+      itemsFound = JSON.parse(items);
       return request(gw2GameApi)
     })
     .then(characters => {
       characters = JSON.parse(characters);
-      characters.forEach(character => {
-        character.bags.forEach(bag => {
-          bag.inventory = bag.inventory.filter(slot => {
-            return slot !== null;
-          })
-          bag.inventory.forEach(invItem => {
-            if (invItem.id == itemId) {
-              foundItemOnChars.push(character.name)
-            }
-          })
-        })
-      })
+      itemsFound.forEach(shiniesItem => {
+        var matchResponseEntry = {};
+        matchResponseEntry.item = shiniesItem;
+        matchResponseEntry.characters = [];
+        characters.forEach(character => {
+          character.bags.forEach(bag => {
+            bag.inventory = bag.inventory.filter(slot => {
+              return slot !== null;
+            })
+            bag.inventory.forEach(invItem => {
+              if (invItem.id == shiniesItem.item_id) {
+                matchResponseEntry.characters.push(character.name);
+              }
+            }) // bag's items
+          }) // character's bags
+        }) // account's characters
 
-      res.json(foundItemOnChars)
+        matchResponse.push(matchResponseEntry);
+      }) // items in gw2shinies search
+      console.log(matchResponse);
+      res.json(matchResponse);
     })
 }

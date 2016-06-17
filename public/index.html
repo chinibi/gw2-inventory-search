@@ -48,8 +48,14 @@
     <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive"  src="images/gears.svg" /></div>
     <div class="container-fluid">
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="char in vm.results track by $index">
-          {{char}}
+        <li class="list-group-item" ng-repeat="result in vm.results track by $index">
+          {{result.item.name}}<br />
+          ID: {{result.item.item_id}}
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="char in result.characters">
+              {{char}}
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
