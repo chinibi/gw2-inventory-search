@@ -1,10 +1,11 @@
 var request = require('request-promise');
-var locus = require('locus');
+var locus   = require('locus');
+var _       = require('lodash');
 
 module.exports = {
   getCharacterList: getCharacterList,
-  getItemList: getItemList,
-  searchItem: searchItem
+  getItemList:      getItemList,
+  searchItem:       searchItem
 }
 
 function getCharacterList(req, res, next) {
@@ -13,7 +14,7 @@ function getCharacterList(req, res, next) {
     headers: {
       Authorization: `Bearer ${req.params.apikey}`
     }
-  }
+  };
 
   request(options)
     .then(body => res.json(JSON.parse(body)))
@@ -23,7 +24,7 @@ function getCharacterList(req, res, next) {
 function getItemList(req, res, next) {
   var options = {
     url: `https://www.gw2shinies.com/api/json/idbyname/${req.params.name}`
-  }
+  };
 
   request(options)
     .then(body => res.json(JSON.parse(body)))
@@ -70,6 +71,7 @@ function searchItem(req, res, next) {
           }) // character's bags
         }) // account's characters
 
+        matchResponseEntry.characters = _.uniq(matchResponseEntry.characters)
         matchResponse.push(matchResponseEntry);
       }) // items in gw2shinies search
       console.log(matchResponse);
