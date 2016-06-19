@@ -3,32 +3,7 @@ var locus   = require('locus');
 var _       = require('lodash');
 
 module.exports = {
-  getCharacterList: getCharacterList,
-  getItemList:      getItemList,
   searchItem:       searchItem
-}
-
-function getCharacterList(req, res, next) {
-  var options = {
-    url: "https://api.guildwars2.com/v2/characters/",
-    headers: {
-      Authorization: `Bearer ${req.params.apikey}`
-    }
-  };
-
-  request(options)
-    .then(body => res.json(JSON.parse(body)))
-    .catch(err => next(err))
-}
-
-function getItemList(req, res, next) {
-  var options = {
-    url: `https://www.gw2shinies.com/api/json/idbyname/${req.params.name}`
-  };
-
-  request(options)
-    .then(body => res.json(JSON.parse(body)))
-    .catch(err => next(err))
 }
 
 function removeNullEntries(entry) {
