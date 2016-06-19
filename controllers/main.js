@@ -31,18 +31,29 @@ function getItemList(req, res, next) {
     .catch(err => next(err))
 }
 
+function removeNullEntries(entry) {
+  return entry !== null;
+}
+
 function searchItem(req, res, next) {
   // defining some stuff first
   var gw2ShiniesApi = {
     url: `https://www.gw2shinies.com/api/json/idbyname/${req.params.item}`
   };
 
-  var gw2GameApi = {
+  var gw2CharactersApi = {
     url: "https://api.guildwars2.com/v2/characters?page=0",
     headers: {
       Authorization: `Bearer ${req.params.apikey}`
     }
   };
+
+  var gw2BankApi = {
+    url: "https://api.guildwars2.com/v2/account/bank",
+    headers: {
+      Authorization: `Bearer ${req.params.apikey}`
+    }
+  }
 
   // now we make the calls
   var matchResponse = [];
@@ -50,31 +61,50 @@ function searchItem(req, res, next) {
   request(gw2ShiniesApi)
     .then(items => {
       itemsFound = JSON.parse(items);
-      return request(gw2GameApi)
+      return Promise.all([request(gw2CharactersApi), request(gw2BankApi)])
     })
-    .then(characters => {
-      characters = JSON.parse(characters);
+    .then(account => {
+      var characters = account[0];
+      var bank       = account[1];
+      characters     = JSON.parse(characters);
+      bank           = JSON.parse(bank);
+
       itemsFound.forEach(shiniesItem => {
         var matchResponseEntry = {};
         matchResponseEntry.item = shiniesItem;
-        matchResponseEntry.characters = [];
+        matchResponseEntry.entities = [];
         characters.forEach(character => {
+          // look through bags
           character.bags.forEach(bag => {
-            bag.inventory = bag.inventory.filter(slot => {
-              return slot !== null;
-            })
+            bag.inventory = bag.inventory.filter(removeNullEntries);
             bag.inventory.forEach(invItem => {
               if (invItem.id == shiniesItem.item_id) {
-                matchResponseEntry.characters.push(character.name);
+                matchResponseEntry.entities.push(character.name);
               }
-            }) // bag's items
-          }) // character's bags
-        }) // account's characters
+            })
+          })
 
-        matchResponseEntry.characters = _.uniq(matchResponseEntry.characters)
+          // look through equipped items
+          character.equipment = character.equipment.filter(removeNullEntries);
+          character.equipment.forEach(equipItem => {
+            if (equipItem.id == shiniesItem.item_id) {
+              matchResponseEntry.entities.push(`${character.name} (Equipped)`)
+            }
+          })
+        })
+
+        // look through account bank
+        bank = bank.filter(removeNullEntries)
+        bank.forEach(item => {
+          if (item.id == shiniesItem.item_id) {
+            matchResponseEntry.entities.push("(Account Bank)")
+          }
+        })
+
+        matchResponseEntry.entities = _.uniq(matchResponseEntry.entities)
         matchResponse.push(matchResponseEntry);
-      }) // items in gw2shinies search
-      console.log(matchResponse);
+      })
+
       res.json(matchResponse);
     })
-}
+  }

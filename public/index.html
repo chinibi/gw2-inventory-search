@@ -16,10 +16,13 @@
   <body ng-controller="MainController as vm">
     <div class="jumbotron">
       <div class="container-fluid">
-        <h1>Guild Wars 2 Inventory Search</h1>
+        <h1 class="text-center">Guild Wars 2 Inventory Search</h1>
         <form>
           <div class="form-group">
-            <label for="apikey">API Key with Characters and Inventories enabled</label>
+            <label for="apikey">
+              API Key with Characters and Inventories enabled<br />
+              Your API Key is saved to your local browser only.
+            </label>
             <input name="apikey" ng-model="vm.apiKey" type="text" class="input-lg form-control" id="apikey" />
           </div>
         </form>
@@ -35,15 +38,15 @@
       </div>
     </div>
 
-    <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive"  src="images/gears.svg" /></div>
-    <div class="container-fluid">
+    <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive"  src="images/gears.svg" ng-cloak /></div>
+    <div class="container-fluid" ng-cloak>
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="result in vm.results track by $index">
           {{result.item.name}}<br />
           ID: {{result.item.item_id}}
           <ul class="list-group">
-            <li class="list-group-item" ng-repeat="char in result.characters">
-              {{char}}
+            <li class="list-group-item" ng-repeat="entity in result.entities">
+              {{entity}}
             </li>
           </ul>
         </li>

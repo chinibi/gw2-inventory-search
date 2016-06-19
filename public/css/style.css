@@ -1,3 +1,11 @@
 .img-responsive {
   margin: 0 auto;
 }
+
+.text-center {
+  text-align: center;
+}
+
+.blue-text {
+  color: lightblue;
+}
