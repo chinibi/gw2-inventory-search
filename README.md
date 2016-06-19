@@ -2,7 +2,7 @@
 
 This is a web app for Guild Wars 2 players.
 
-Looks up who's holding the item you're looking for.  Good for players with many characters who share account-bound items with each other but don't want to waste time loading each character in game.  Site has a text-based interface for speed.
+Looks up who's holding the item you're looking for.  Good for players with many characters who share account-bound items with each other but don't want to waste time loading each character in game looking for those items.  Site has a text-based interface for speed.
 
 GW2Shinies supplies the item names to the item IDs ANet responds with.
 
@@ -13,6 +13,5 @@ GW2Shinies supplies the item names to the item IDs ANet responds with.
 
 ##To Do
 
-- Remove duplicate characters from results
-- Have item names in results link to corresponding gw2shinies page
-- Search through account bank and characters' equipped items.  Currently only searches through characters' bags.
+- Search for transmuted items by their skins' name.
+- Have item names in results link to corresponding gw2shinies page.
