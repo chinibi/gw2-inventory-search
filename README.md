@@ -15,6 +15,7 @@ GW2Shinies supplies the item names to the item IDs ANet responds with.
 
 - Search for transmuted items by their skins' name.
 - Have item names in results link to corresponding gw2shinies page.
+- Replace svg loading animation with CSS or Web animations.
 
 ##Technologies Used
 
