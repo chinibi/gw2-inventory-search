@@ -17,14 +17,15 @@ GW2Shinies supplies the item names to the item IDs ANet responds with.
 - Have item names in results link to corresponding gw2shinies page.
 
 ##Technologies Used
-Back-end:
+
+###Back-end
 
 - Node.js
 - Express.js
 - lodash
 - request-promise
 
-Front-end:
+###Front-end:
 
 - AngularJS
 - Bootstrap
