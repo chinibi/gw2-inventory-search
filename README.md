@@ -8,6 +8,7 @@ GW2Shinies supplies the item names to the item IDs ANet responds with.
 
 ##Current Issues
 
+- Can't search for transmuted items by their skin's name. You have to enter the original item's name to find it.
 - Can't search for exact match. For example if a user wanted to search for the Bo staff the short character length would cause gw2shinies to match about 4000 items.
 
 ##To Do
