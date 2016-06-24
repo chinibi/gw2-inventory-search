@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.apiKey           = '';
+    vm.errMsg           = '';
     vm.results          = [];
     vm.setAPIKey        = setAPIKey;
     vm.itemToSearch     = '';
@@ -38,6 +39,7 @@
     }
 
     function searchInventory() {
+      vm.errMsg = '';
       renderLoadingScreen();
       var query = vm.itemToSearch.replace(/ /g, "%20");
 
@@ -48,6 +50,9 @@
       .then(function(response) {
         vm.loading = false;
         vm.results = response.data;
+        if (!response.data.length) {
+          vm.errMsg = 'No items found'
+        }
       })
     }
 

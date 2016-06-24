@@ -46,12 +46,13 @@
 
     <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive"  src="images/gears.svg" ng-cloak /></div>
     <div class="container-fluid" ng-cloak>
+      <div ng-show="vm.errMsg">{{vm.errMsg}}</div>
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="result in vm.results track by $index">
+        <li class="list-group-item item" ng-repeat="result in vm.results track by $index">
           {{result.item.name}}<br />
           ID: {{result.item.item_id}}
           <ul class="list-group">
-            <li class="list-group-item light-blue-bg" ng-repeat="entity in result.entities">
+            <li class="list-group-item entity" ng-repeat="entity in result.entities">
               {{entity}}
             </li>
           </ul>

@@ -82,4 +82,5 @@ function searchItem(req, res, next) {
 
       res.json(matchResponse);
     })
+    .catch(err => res.json(err))
   }
