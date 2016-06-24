@@ -13,6 +13,7 @@ GW2Shinies supplies the item names to the item IDs ANet responds with.
 
 ##To Do
 
+- Sort results such that items the account possesses are at the top.
 - Search for transmuted items by their skins' name.
 - Have item names in results link to corresponding gw2shinies page.
 - Replace svg loading animation with CSS or Web animations.
