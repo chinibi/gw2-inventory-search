@@ -50,6 +50,7 @@
       .then(function(response) {
         vm.loading = false;
         vm.results = response.data;
+        console.log(vm.results)
         if (!response.data.length) {
           vm.errMsg = 'No items found'
         }

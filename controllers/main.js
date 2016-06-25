@@ -76,6 +76,7 @@ function searchItem(req, res, next) {
           }
         })
 
+        // remove duplicate results
         matchResponseEntry.entities = _.uniq(matchResponseEntry.entities)
         matchResponse.push(matchResponseEntry);
       })
