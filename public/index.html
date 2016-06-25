@@ -20,7 +20,7 @@
         <form>
           <div class="form-group">
             <label for="apikey">
-              API Key with Characters and Inventories enabled<br />
+              API Key with Characters and Inventories enabled. <a href="https://account.arena.net/applications" target="_blank">Get an API Key</a><br />
               Your API Key is saved to your local browser only.
             </label>
             <input name="apikey" ng-model="vm.apiKey" type="text" class="input-lg form-control" id="apikey" />
@@ -44,11 +44,11 @@
       </div>
     </div>
 
-    <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive"  src="images/gears.svg" ng-cloak /></div>
+    <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive" src="images/gears.svg" ng-cloak /></div>
     <div class="container-fluid" ng-cloak>
       <div ng-show="vm.errMsg">{{vm.errMsg}}</div>
       <ul class="list-group">
-        <li class="list-group-item item" ng-repeat="result in vm.results track by $index">
+        <li class="list-group-item item" ng-repeat="result in vm.results | orderBy: '-entities' ">
           {{result.item.name}}<br />
           ID: {{result.item.item_id}}
           <ul class="list-group">
