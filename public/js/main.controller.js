@@ -31,6 +31,8 @@
 
     function setAPIKey() {
       local.setItem("gw2_API_Key", vm.apiKey);
+      console.log("vm.apiKey: " + vm.apiKey)
+      console.log(local.getItem("gw2_API_Key"))
     }
 
     function renderLoadingScreen() {
