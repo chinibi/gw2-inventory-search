@@ -17,35 +17,38 @@
     <div class="jumbotron">
       <div class="container-fluid">
         <h1 class="text-center">Guild Wars 2 Inventory Search</h1>
-        <form>
-          <div class="form-group">
-            <label for="apikey">
-              API Key with Characters and Inventories enabled. <a href="https://account.arena.net/applications" target="_blank">Get an API Key</a><br />
-              Your API Key is saved to your local browser only.
-            </label>
-            <input name="apikey" ng-model="vm.apiKey" type="text" class="input-lg form-control" id="apikey" />
-          </div>
-        </form>
+        <div class="margins">
+          <form>
+            <div class="form-group">
+              <label for="apikey">
+                API Key with Characters and Inventories enabled. <a href="https://account.arena.net/applications" target="_blank">Get an API Key</a><br />
+                Your API Key is saved to your local browser only.
+              </label>
+              <input name="apikey" ng-model="vm.apiKey" type="text" class="input-lg form-control" id="apikey" />
+            </div>
 
-        <form>
-          <div class="form-group">
-            <label for="item-search">Item to search for</label>
-            <input ng-model="vm.itemToSearch" type="text" class="input-lg form-control" id="item-search" />
+
+            <div class="form-group">
+              <label for="item-search">Item to search for</label>
+              <input ng-model="vm.itemToSearch" type="text" class="input-lg form-control" id="item-search" />
+            </div>
 
             <button class="btn btn-default" ng-click="vm.searchInventory()">Submit</button>
-          </div>
-        </form>
+          </form>
+        </div>
 
+        <div class="margins">
           If you just want a quick demo use my key: <br />
           <b>F4A42CC1-D170-2A41-8451-A1AF3B1B7C5FEDFE82B1-9391-4F52-B414-E8C6576BC3DB</b><br />
           And some sample items to search: <br />
           <b>Arrow Cart Blueprints | Zojja's Greatsword | Sharpening Stone | Princess | Black Lion | Mystic Salvage Kit | Ahamid's</b>
+        </div>
 
       </div>
     </div>
 
     <div class="container-fluid" ng-show="vm.loading"><img class="img-responsive" src="images/gears.svg" ng-cloak /></div>
-    <div class="container-fluid" ng-cloak>
+    <div class="container-fluid margins" ng-cloak>
       <div ng-show="vm.errMsg">{{vm.errMsg}}</div>
       <ul class="list-group">
         <li class="list-group-item item" ng-repeat="result in vm.results | orderBy: '-entities' ">
@@ -58,6 +61,12 @@
           </ul>
         </li>
       </ul>
+    </div>
+
+    <div id="footer" class="margins">
+      <p>
+        Created by <a href="https://github.com/chinibi" target="_blank">Chinib</a>
+      </p>
     </div>
 
 
